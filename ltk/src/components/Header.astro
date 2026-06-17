@@ -1,15 +1,94 @@
-<header class="border-b border-zinc-800">
-	<div class="mx-auto max-w-7xl px-6 py-4">
-		<div class="flex items-center justify-between">
-			<div class="text-lg font-bold text-green-500">
-				ЛТК
-			</div>
+---
+const navItems = [
+  { label: "Технология", href: "#technology" },
+  { label: "Применение", href: "#applications" },
+  { label: "Комплексы", href: "#products" },
+  { label: "Преимущества", href: "#advantages" },
+  { label: "Контакты", href: "#contacts" }
+];
+---
 
-			<nav class="hidden md:flex gap-8">
-				<a href="#technology">Технология</a>
-				<a href="#advantages">Преимущества</a>
-				<a href="#contacts">Контакты</a>
+<header
+	class="sticky top-0 z-50 backdrop-blur-md"
+	style={{
+		background: "rgba(9, 9, 11, 0.85)",
+		borderBottom: "1px solid var(--color-border)"
+	}}
+>
+	<div class="section-container">
+		<div class="flex items-center justify-between h-16">
+
+			<a
+				href="/"
+				class="text-lg font-bold tracking-wide"
+				style={{ color: "var(--color-primary)" }}
+			>
+				ЛТК
+			</a>
+
+			<!-- Desktop nav -->
+			<nav
+				class="hidden md:flex gap-8 text-sm"
+				style={{ color: "var(--color-text-muted)" }}
+			>
+				{navItems.map((item) => (
+					<a
+						href={item.href}
+						class="transition-colors"
+						style={{ color: "inherit" }}
+						onMouseOver={(e) =>
+							(e.currentTarget.style.color = "var(--color-text)")
+						}
+						onMouseOut={(e) =>
+							(e.currentTarget.style.color = "var(--color-text-muted)")
+						}
+					>
+						{item.label}
+					</a>
+				))}
 			</nav>
+
+			<!-- Mobile button -->
+			<button
+				id="menuBtn"
+				class="md:hidden"
+				style={{ color: "var(--color-text-muted)" }}
+				aria-label="Open menu"
+				aria-expanded="false"
+			>
+				Меню
+			</button>
+
 		</div>
+
+		<!-- Mobile menu -->
+		<nav
+			id="mobileMenu"
+			class="hidden flex-col gap-4 py-4 md:hidden text-sm"
+			style={{ color: "var(--color-text-muted)" }}
+		>
+			{navItems.map((item) => (
+				<a
+					href={item.href}
+					style={{ color: "inherit" }}
+				>
+					{item.label}
+				</a>
+			))}
+		</nav>
 	</div>
+
+	<script is:inline>
+		const btn = document.getElementById("menuBtn");
+		const menu = document.getElementById("mobileMenu");
+
+		let open = false;
+
+		btn?.addEventListener("click", () => {
+			open = !open;
+
+			menu.classList.toggle("hidden", !open);
+			btn.setAttribute("aria-expanded", String(open));
+		});
+	</script>
 </header>

@@ -5,6 +5,7 @@ import Hero from "../components/Hero.astro";
 
 import Technology from "../components/Technology.astro";
 import Applications from "../components/Applications.astro";
+import Products from "../components/Products.astro";
 import Advantages from "../components/Advantages.astro";
 import Gallery from "../components/Gallery.astro";
 import FAQ from "../components/FAQ.astro";
@@ -18,29 +19,28 @@ import Footer from "../components/Footer.astro";
 >
 	<Header />
 
+	<!-- HERO / VALUE PROPOSITION -->
 	<Hero />
 
+	<!-- HOW IT WORKS -->
 	<Technology />
-
+	
+	<!-- CONTEXT / USE CASES -->
 	<Applications />
-		<section id="applications" class="py-24">
-			<div class="mx-auto max-w-7xl px-6">
-				<h2 class="text-4xl font-bold mb-6">
-					Сферы применения
-				h2>
 
-				<p class="text-zinc-400">
-					Силовые структуры, учебные центры,
-					стрелковые клубы и образовательные учреждения.
-				</p>
-			</div>
-		</section>
+	<!-- PRODUCT -->
+	<Products />
+
+	<!-- TRUST / BENEFITS -->
 	<Advantages />
 
+	<!-- VISUAL PROOF -->
 	<Gallery />
 
+	<!-- OBJECTIONS -->
 	<FAQ />
 
+	<!-- CONVERSION -->
 	<Contacts />
 
 	<Footer />
