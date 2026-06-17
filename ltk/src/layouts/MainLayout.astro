@@ -1,0 +1,46 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = "Лазерные тренировочные комплексы"
+} = Astro.props;
+
+const url = Astro.url;
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+
+		<!-- SEO -->
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={url} />
+
+		<!-- Mobile theming -->
+		<meta name="theme-color" content="#09090b" />
+	</head>
+
+	<body>
+		<slot />
+	</body>
+</html>

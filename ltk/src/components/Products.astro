@@ -1,0 +1,109 @@
+---
+const products = [
+	{
+		title: "Базовый комплекс",
+		description: "Для обучения основам стрельбы и проведения регулярных тренировок.",
+		features: [
+			"Лазерный модуль",
+			"ПО анализа попаданий",
+			"Учебные сценарии"
+		],
+		cta: "Подробнее",
+		featured: false
+	},
+	{
+		title: "Профессиональный комплекс",
+		description: "Для учебных центров и организаций, занимающихся подготовкой стрелков.",
+		features: [
+			"Многопользовательский режим",
+			"Расширенная аналитика",
+			"Тактические сценарии",
+			"Отчетность"
+		],
+		cta: "Запросить демонстрацию",
+		featured: true
+	},
+	{
+		title: "Индивидуальное решение",
+		description: "Комплектация и функциональность под задачи конкретного заказчика.",
+		features: [
+			"Индивидуальная настройка",
+			"Дополнительные модули",
+			"Интеграция оборудования"
+		],
+		cta: "Связаться",
+		featured: false
+	}
+];
+---
+
+<section id="products" class="py-24">
+	<div class="section-container">
+
+		<div class="mb-12">
+			<h2 class="mb-4 text-4xl font-bold"
+				style="color: var(--color-text);">
+				Комплексы и решения
+			</h2>
+
+			<p class="max-w-3xl"
+			   style="color: var(--color-text-muted);">
+				Линейка решений может быть адаптирована под задачи
+				учебных центров, стрелковых клубов и ведомственных организаций.
+			</p>
+		</div>
+
+		<div class="grid gap-8 lg:grid-cols-3">
+
+			{products.map((p) => (
+				<article
+					class="card"
+					style={
+						p.featured
+							? { borderColor: "var(--color-primary)" }
+							: undefined
+					}
+				>
+
+					{p.featured && (
+						<div class="mb-4 inline-block rounded-full px-3 py-1 text-sm"
+							style={{
+								background: "var(--color-primary)",
+								color: "var(--color-text)"
+							}}
+						>
+							Популярное решение
+						</div>
+					)}
+
+					<h3 class="mb-4 text-2xl font-semibold"
+						style={{ color: "var(--color-primary)" }}>
+						{p.title}
+					</h3>
+
+					<p class="mb-6"
+					   style={{ color: "var(--color-text-muted)" }}>
+						{p.description}
+					</p>
+
+					<ul class="mb-8 space-y-2"
+						style={{ color: "var(--color-text-muted)" }}>
+						{p.features.map((f) => (
+							<li>• {f}</li>
+						))}
+					</ul>
+
+					<a
+						href="#contacts"
+						class="btn-secondary"
+					>
+						{p.cta}
+					</a>
+
+				</article>
+			))}
+
+		</div>
+
+	</div>
+</section>

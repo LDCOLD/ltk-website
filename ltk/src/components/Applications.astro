@@ -1,0 +1,55 @@
+---
+const items = [
+	{
+		title: "Силовые структуры",
+		text: "Подготовка и поддержание навыков личного состава без расхода боеприпасов."
+	},
+	{
+		title: "Учебные центры",
+		text: "Обучение курсантов в контролируемой среде."
+	},
+	{
+		title: "Стрелковые клубы",
+		text: "Тренировки и соревнования."
+	},
+	{
+		title: "Образовательные учреждения",
+		text: "Военно-патриотическая подготовка."
+	}
+];
+---
+
+<section id="applications" class="py-24">
+	<div class="section-container">
+
+		<h2 class="mb-4 text-4xl font-bold"
+			style="color: var(--color-text);">
+			Сферы применения
+		</h2>
+
+		<p class="mb-12 max-w-3xl"
+		   style="color: var(--color-text-muted);">
+			Лазерные тренировочные комплексы подходят для подготовки стрелков различного уровня.
+		</p>
+
+		<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+
+			{items.map((item) => (
+				<article class="card">
+
+					<h3 class="mb-3 text-xl font-semibold"
+						style="color: var(--color-primary);">
+						{item.title}
+					</h3>
+
+					<p style="color: var(--color-text-muted);">
+						{item.text}
+					</p>
+
+				</article>
+			))}
+
+		</div>
+
+	</div>
+</section>

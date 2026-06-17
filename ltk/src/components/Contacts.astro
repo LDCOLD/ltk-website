@@ -1,0 +1,91 @@
+---
+const contacts = [
+	{
+		title: "Телефон",
+		value: "+7 (XXX) XXX-XX-XX",
+		link: "tel:+7XXXXXXXXXX"
+	},
+	{
+		title: "E-mail",
+		value: "info@example.ru",
+		link: "mailto:info@example.ru"
+	},
+	{
+		title: "Telegram",
+		value: "@username",
+		link: "https://t.me/username"
+	},
+	{
+		title: "Время работы",
+		value: "Пн–Пт, 09:00–18:00",
+		link: null
+	}
+];
+---
+
+<section id="contacts" class="py-24">
+	<div class="section-container">
+
+		<div
+			class="rounded-2xl border p-12"
+			style={{
+				borderColor: "var(--color-border)",
+				background: "var(--color-bg-secondary)"
+			}}
+		>
+
+			<h2 class="mb-4 text-4xl font-bold"
+				style={{ color: "var(--color-text)" }}>
+				Готовы ознакомиться с комплексом?
+			</h2>
+
+			<p class="mb-10 max-w-2xl"
+			   style={{ color: "var(--color-text-muted)" }}>
+				Свяжитесь с нами для получения дополнительной информации,
+				демонстрации возможностей комплекса или обсуждения индивидуального решения.
+			</p>
+
+			<div class="grid gap-8 md:grid-cols-2">
+
+				{contacts.map((c) => (
+					<div>
+						<h3 class="mb-3 text-lg font-semibold"
+							style={{ color: "var(--color-primary)" }}>
+							{c.title}
+						</h3>
+
+						{c.link ? (
+							<a
+								href={c.link}
+								class="text-base"
+								style={{ color: "var(--color-text)" }}
+							>
+								{c.value}
+							</a>
+						) : (
+							<p style={{ color: "var(--color-text)" }}>
+								{c.value}
+							</p>
+						)}
+					</div>
+				))}
+
+			</div>
+
+			<div class="mt-10">
+				<a
+					href="mailto:info@example.ru"
+					class="inline-block rounded-lg px-6 py-3 font-semibold"
+					style={{
+						background: "var(--color-primary-dark)",
+						color: "var(--color-text)"
+					}}
+				>
+					Запросить демонстрацию
+				</a>
+			</div>
+
+		</div>
+
+	</div>
+</section>
