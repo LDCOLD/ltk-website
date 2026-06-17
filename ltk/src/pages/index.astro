@@ -1,0 +1,47 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+
+import Technology from "../components/Technology.astro";
+import Applications from "../components/Applications.astro";
+import Advantages from "../components/Advantages.astro";
+import Gallery from "../components/Gallery.astro";
+import FAQ from "../components/FAQ.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<MainLayout
+	title="Лазерные тренировочные комплексы"
+	description="Современные лазерные тренировочные комплексы для подготовки стрелков."
+>
+	<Header />
+
+	<Hero />
+
+	<Technology />
+
+	<Applications />
+		<section id="applications" class="py-24">
+			<div class="mx-auto max-w-7xl px-6">
+				<h2 class="text-4xl font-bold mb-6">
+					Сферы применения
+				h2>
+
+				<p class="text-zinc-400">
+					Силовые структуры, учебные центры,
+					стрелковые клубы и образовательные учреждения.
+				</p>
+			</div>
+		</section>
+	<Advantages />
+
+	<Gallery />
+
+	<FAQ />
+
+	<Contacts />
+
+	<Footer />
+</MainLayout>
