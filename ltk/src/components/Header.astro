@@ -44,100 +44,112 @@ const navItems = [
 			<!-- Mobile button -->
 			<button
 				id="menuBtn"
-				class="md:hidden"
-				style={{ color: "var(--color-text-muted)" }}
+				class="text-2xl md:hidden"
+				style={{ color: "var(--color-text)" }}
 				aria-label="Открыть меню"
 				aria-expanded="false"
 			>
-				Меню
+				☰
 			</button>
 
 		</div>
 	</div>
-
-	<!-- Overlay -->
-	<div
-		id="menuOverlay"
-		class="fixed inset-0 z-40 hidden bg-black/60 md:hidden"
-	></div>
-
-	<!-- Mobile menu -->
-	<nav
-		id="mobileMenu"
-		class="fixed top-0 right-0 z-50 hidden h-screen w-72 flex-col gap-6 p-8 md:hidden"
-		style="
-			background: var(--color-bg-secondary);
-			border-left: 1px solid var(--color-border);
-		"
-	>
-		<div class="mb-4 flex items-center justify-between">
-
-			<span
-				class="text-lg font-semibold"
-				style="color: var(--color-primary);"
-			>
-				Меню
-			</span>
-
-			<button
-				id="closeMenuBtn"
-				style="color: var(--color-text-muted);"
-				aria-label="Закрыть меню"
-			>
-				✕
-			</button>
-
-		</div>
-
-		{navItems.map((item) => (
-			<a
-				href={item.href}
-				class="mobile-link text-lg"
-				style="color: var(--color-text);"
-			>
-				{item.label}
-			</a>
-		))}
-	</nav>
-
-	<script is:inline>
-		const btn = document.getElementById("menuBtn");
-		const closeBtn = document.getElementById("closeMenuBtn");
-		const menu = document.getElementById("mobileMenu");
-		const overlay = document.getElementById("menuOverlay");
-		const links = document.querySelectorAll(".mobile-link");
-
-		function openMenu() {
-			menu.classList.remove("hidden");
-			menu.classList.add("flex");
-
-			overlay.classList.remove("hidden");
-
-			btn?.setAttribute("aria-expanded", "true");
-		}
-
-		function closeMenu() {
-			menu.classList.add("hidden");
-			menu.classList.remove("flex");
-
-			overlay.classList.add("hidden");
-
-			btn?.setAttribute("aria-expanded", "false");
-		}
-
-		btn?.addEventListener("click", () => {
-			if (menu.classList.contains("hidden")) {
-				openMenu();
-			} else {
-				closeMenu();
-			}
-		});
-
-		closeBtn?.addEventListener("click", closeMenu);
-		overlay?.addEventListener("click", closeMenu);
-
-		links.forEach((link) => {
-			link.addEventListener("click", closeMenu);
-		});
-	</script>
 </header>
+
+<!-- Overlay -->
+<div
+	id="menuOverlay"
+	class="fixed inset-0 z-[90] hidden bg-black/60"
+></div>
+
+<!-- Mobile menu -->
+<nav
+	id="mobileMenu"
+	class="fixed top-0 right-0 z-[100] hidden h-screen w-72 flex-col gap-6 p-8"
+	style="
+		background: var(--color-bg-secondary);
+		border-left: 1px solid var(--color-border);
+	"
+>
+	<div class="mb-4 flex items-center justify-between">
+
+		<span
+			class="text-lg font-semibold"
+			style="color: var(--color-primary);"
+		>
+			Меню
+		</span>
+
+		<button
+			id="closeMenuBtn"
+			class="text-2xl"
+			style="color: var(--color-text-muted);"
+			aria-label="Закрыть меню"
+		>
+			✕
+		</button>
+
+	</div>
+
+	{navItems.map((item) => (
+		<a
+			href={item.href}
+			class="mobile-link block text-lg"
+			style="color: var(--color-text);"
+		>
+			{item.label}
+		</a>
+	))}
+</nav>
+
+<script is:inline>
+	const btn = document.getElementById("menuBtn");
+	const closeBtn = document.getElementById("closeMenuBtn");
+	const menu = document.getElementById("mobileMenu");
+	const overlay = document.getElementById("menuOverlay");
+	const links = document.querySelectorAll(".mobile-link");
+
+	function openMenu() {
+		menu.classList.remove("hidden");
+		menu.classList.add("flex");
+
+		overlay.classList.remove("hidden");
+
+		document.body.style.overflow = "hidden";
+
+		btn?.setAttribute("aria-expanded", "true");
+	}
+
+	function closeMenu() {
+		menu.classList.add("hidden");
+		menu.classList.remove("flex");
+
+		overlay.classList.add("hidden");
+
+		document.body.style.overflow = "";
+
+		btn?.setAttribute("aria-expanded", "false");
+	}
+
+	btn?.addEventListener("click", () => {
+		if (menu.classList.contains("hidden")) {
+			openMenu();
+		} else {
+			closeMenu();
+		}
+	});
+
+	closeBtn?.addEventListener("click", closeMenu);
+
+	overlay?.addEventListener("click", closeMenu);
+
+	links.forEach((link) => {
+		link.addEventListener("click", closeMenu);
+	});
+
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape") {
+			closeMenu();
+		}
+	});
+</script>
