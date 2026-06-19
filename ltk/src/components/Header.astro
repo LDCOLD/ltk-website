@@ -1,10 +1,10 @@
 ---
 const navItems = [
-  { label: "Технология", href: "#technology" },
-  { label: "Применение", href: "#applications" },
-  { label: "Комплексы", href: "#products" },
-  { label: "Преимущества", href: "#advantages" },
-  { label: "Контакты", href: "#contacts" }
+	{ label: "Технология", href: "#technology" },
+	{ label: "Применение", href: "#applications" },
+	{ label: "Комплексы", href: "#products" },
+	{ label: "Преимущества", href: "#advantages" },
+	{ label: "Контакты", href: "#contacts" }
 ];
 ---
 
@@ -16,7 +16,7 @@ const navItems = [
 	}}
 >
 	<div class="section-container">
-		<div class="flex items-center justify-between h-16">
+		<div class="flex h-16 items-center justify-between">
 
 			<a
 				href="/"
@@ -28,20 +28,13 @@ const navItems = [
 
 			<!-- Desktop nav -->
 			<nav
-				class="hidden md:flex gap-8 text-sm"
+				class="hidden gap-8 text-sm md:flex"
 				style={{ color: "var(--color-text-muted)" }}
 			>
 				{navItems.map((item) => (
 					<a
 						href={item.href}
-						class="transition-colors"
-						style={{ color: "inherit" }}
-						onMouseOver={(e) =>
-							(e.currentTarget.style.color = "var(--color-text)")
-						}
-						onMouseOut={(e) =>
-							(e.currentTarget.style.color = "var(--color-text-muted)")
-						}
+						class="transition-colors hover:text-white"
 					>
 						{item.label}
 					</a>
@@ -53,52 +46,98 @@ const navItems = [
 				id="menuBtn"
 				class="md:hidden"
 				style={{ color: "var(--color-text-muted)" }}
-				aria-label="Open menu"
+				aria-label="Открыть меню"
 				aria-expanded="false"
 			>
 				Меню
 			</button>
 
 		</div>
+	</div>
 
-		<!-- Mobile menu -->
-		<nav
-			id="mobileMenu"
-			class="fixed top-0 right-0 hidden h-screen w-72 flex-col gap-6 p-8 md:hidden"
-			style="
-				background: var(--color-bg-secondary);
-				border-left: 1px solid var(--color-border);
-			"
-		>
+	<!-- Overlay -->
+	<div
+		id="menuOverlay"
+		class="fixed inset-0 z-40 hidden bg-black/60 md:hidden"
+	></div>
+
+	<!-- Mobile menu -->
+	<nav
+		id="mobileMenu"
+		class="fixed top-0 right-0 z-50 hidden h-screen w-72 flex-col gap-6 p-8 md:hidden"
+		style="
+			background: var(--color-bg-secondary);
+			border-left: 1px solid var(--color-border);
+		"
+	>
+		<div class="mb-4 flex items-center justify-between">
+
+			<span
+				class="text-lg font-semibold"
+				style="color: var(--color-primary);"
+			>
+				Меню
+			</span>
+
+			<button
+				id="closeMenuBtn"
+				style="color: var(--color-text-muted);"
+				aria-label="Закрыть меню"
+			>
+				✕
+			</button>
+
+		</div>
+
 		{navItems.map((item) => (
 			<a
 				href={item.href}
-				class="text-lg"
+				class="mobile-link text-lg"
 				style="color: var(--color-text);"
 			>
 				{item.label}
 			</a>
 		))}
-		</nav>
-	</div>
+	</nav>
 
 	<script is:inline>
 		const btn = document.getElementById("menuBtn");
+		const closeBtn = document.getElementById("closeMenuBtn");
 		const menu = document.getElementById("mobileMenu");
 		const overlay = document.getElementById("menuOverlay");
+		const links = document.querySelectorAll(".mobile-link");
+
+		function openMenu() {
+			menu.classList.remove("hidden");
+			menu.classList.add("flex");
+
+			overlay.classList.remove("hidden");
+
+			btn?.setAttribute("aria-expanded", "true");
+		}
+
+		function closeMenu() {
+			menu.classList.add("hidden");
+			menu.classList.remove("flex");
+
+			overlay.classList.add("hidden");
+
+			btn?.setAttribute("aria-expanded", "false");
+		}
 
 		btn?.addEventListener("click", () => {
-			menu.classList.toggle("hidden");
-			overlay.classList.toggle("hidden");
-
-			const isOpen = !menu.classList.contains("hidden");
-			btn.setAttribute("aria-expanded", String(isOpen));
+			if (menu.classList.contains("hidden")) {
+				openMenu();
+			} else {
+				closeMenu();
+			}
 		});
 
-		overlay?.addEventListener("click", () => {
-			menu.classList.add("hidden");
-			overlay.classList.add("hidden");
-			btn?.setAttribute("aria-expanded", "false");
+		closeBtn?.addEventListener("click", closeMenu);
+		overlay?.addEventListener("click", closeMenu);
+
+		links.forEach((link) => {
+			link.addEventListener("click", closeMenu);
 		});
 	</script>
 </header>
